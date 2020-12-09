@@ -30,6 +30,16 @@ quoteRouter.get('/', (req, res, next) => {
     }
 })
 
+quoteRouter.post('/', (req, res, next) => {
+    if(req.query.quote && req.query.person){
+        res.send({quote: req.query})
+        quotes.push(req.query);
+    }
+    else{
+        res.status(400).send('oops');
+    }
+})
+
 app.use(express.static('public'));
 app.listen(PORT, () => {
     console.log('listening on ' + PORT)
